@@ -1,0 +1,39 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                        
+
+Customers found with findAll():
+-------------------------------
+Customer[id=1, firstName='Jack', lastName='Bauer']
+Customer[id=2, firstName='Chloe', lastName='O'Brian']
+Customer[id=3, firstName='Kim', lastName='Bauer']
+Customer[id=4, firstName='David', lastName='Palmer']
+Customer[id=5, firstName='Michelle', lastName='Dessler']
+Customer[id=6, firstName='Jack', lastName='Bauer']
+Customer[id=7, firstName='Chloe', lastName='O'Brian']
+Customer[id=8, firstName='Kim', lastName='Bauer']
+Customer[id=9, firstName='David', lastName='Palmer']
+Customer[id=10, firstName='Michelle', lastName='Dessler']
+Customer[id=11, firstName='Jack', lastName='Bauer']
+Customer[id=12, firstName='Chloe', lastName='O'Brian']
+Customer[id=13, firstName='Kim', lastName='Bauer']
+Customer[id=14, firstName='David', lastName='Palmer']
+Customer[id=15, firstName='Michelle', lastName='Dessler']
+
+Customer found with findOne(1L):
+--------------------------------
+Customer[id=1, firstName='Jack', lastName='Bauer']
+
+Customer found with findByLastName('Bauer'):
+--------------------------------------------
+Customer[id=1, firstName='Jack', lastName='Bauer']
+Customer[id=3, firstName='Kim', lastName='Bauer']
+Customer[id=6, firstName='Jack', lastName='Bauer']
+Customer[id=8, firstName='Kim', lastName='Bauer']
+Customer[id=11, firstName='Jack', lastName='Bauer']
+Customer[id=13, firstName='Kim', lastName='Bauer']

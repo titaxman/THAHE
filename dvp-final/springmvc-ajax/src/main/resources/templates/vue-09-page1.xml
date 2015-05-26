@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h2>Page 1</h2>
+		<!-- zone 1 -->
+		<fieldset id="zone1" style="background-color:pink">
+			<legend>Zone 1</legend>
+			<span id="zone1-content" th:text="xx">xx</span>
+		</fieldset>
+		<!-- zone 2 -->
+		<fieldset id="zone2" style="background-color:lightgreen">
+			<legend>Zone 2</legend>
+			<span>Ce texte reste toujours présent</span>
+		</fieldset>
+		<!-- zone 3 -->
+		<fieldset id="zone3" style="background-color:yellow">
+			<legend>Zone 3</legend>
+			<span id="zone3-content" th:text="zz">zz</span>
+		</fieldset>
+		<br />
+		<p>
+			<button onclick="javascript:postForm()">Rafraîchir</button>
+		</p>
+		<hr />
+		<div id="saisies" th:include="vue-09-saisies">
+		</div>
+	</body>
+</html>

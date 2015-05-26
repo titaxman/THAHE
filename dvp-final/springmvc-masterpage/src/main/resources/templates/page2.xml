@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+	<section layout:fragment="contenu">
+		<h2>Page 2</h2>
+		<form action="/someURL" th:action="@{/page1.html}" method="post">
+			<input type="submit" value="Page 1" />
+		</form>
+	</section>
+</html>

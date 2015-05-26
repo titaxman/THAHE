@@ -1,0 +1,9 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h4>Page 2</h4>
+		<p>
+			<a href="javascript:gotoPage(1)">Page 1</a>
+		</p>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+/*styles perso*/
+body {
+	background-image: url("/images/standard.jpg");
+}
+
+.col1 {
+	background: lightblue;
+}
+
+.col2 {
+	background: Cornsilk;
+}
+
+.col3 {
+	background: AliceBlue;
+}
+
+.col4 {
+	background: Lavender;
+}
+
+.error {
+	color: red;
+}
+
+.fieldset{
+	background: Lavender;
+}
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+	color: #f00;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+.input-validation-error {
+	border: 1px solid #f00;
+	background-color: #fee;
+}
+
+.validation-summary-errors {
+	font-weight: bold;
+	color: #f00;
+}
+
+.validation-summary-valid {
+	display: none;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/css/form19.css" />
+	</head>
+	<body>
+		<h3>Formulaire - Cases à cocher</h3>
+		<form action="/someURL" th:action="@{/v24.html}" method="post" th:object="${form}">
+			<table>
+				<thead>
+					<tr>
+						<th class="col1">Texte</th>
+						<th class="col2">Saisie</th>
+						<th class="col3">Valeur</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col1">Vos couleurs préférées</td>
+						<td class="col2">
+							<input type="checkbox" th:field="*{couleurs}" value="0" />
+							<label th:for="${#ids.prev('couleurs')}">rouge</label>
+							<input type="checkbox" th:field="*{couleurs}" value="1" />
+							<label th:for="${#ids.prev('couleurs')}">vert</label>
+							<input type="checkbox" th:field="*{couleurs}" value="2" />
+							<label th:for="${#ids.prev('couleurs')}">bleu</label>
+						</td>
+						<td class="col3">
+							<span th:text="*{strCouleurs}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">Pierres préférées</td>
+						<td class="col2">
+							<span th:each="label, status : ${listes.libellesBijoux}">
+								<input type="checkbox" th:field="*{bijoux}" th:value="${status.index}" />
+								<label th:for="${#ids.prev('bijoux')}" th:text="${label}">Autre</label>
+							</span>
+						</td>
+						<td class="col3">
+							<span th:text="*{strBijoux}"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<input type="submit" value="Valider" />
+			</p>
+		</form>
+	</body>
+</html>

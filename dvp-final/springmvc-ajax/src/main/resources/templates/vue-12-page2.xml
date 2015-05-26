@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h2>Page 2</h2>
+		<p>
+			<h4>Valeurs saisies :</h4>
+			<p>
+				Chaîne de caractères :
+				<span id="value1"></span>
+			</p>
+			<p>
+				Nombre entier :
+				<span id="value2"></span>
+			</p>
+			<a href="javascript:retourPage1()">Retour à la page 1</a>
+		</p>
+	</body>
+</html>

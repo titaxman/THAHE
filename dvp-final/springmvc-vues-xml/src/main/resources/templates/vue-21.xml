@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/css/form19.css" />
+	</head>
+	<body>
+
+		<h3>Formulaire - Boutons radio</h3>
+		<form action="/someURL" th:action="@{/v22.html}" method="post" th:object="${form}">
+			<table>
+				<thead>
+					<tr>
+						<th class="col1">Texte</th>
+						<th class="col2">Saisie</th>
+						<th class="col3">Valeur</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col1">Etes-vous marié(e)</td>
+						<td class="col2">
+							<input type="radio" th:field="*{marie}" value="oui" />
+							<label th:for="${#ids.prev('marie')}">Oui</label>
+							<input type="radio" th:field="*{marie}" value="non" />
+							<label th:for="${#ids.prev('marie')}">Non</label>
+						</td>
+						<td class="col3">
+							<span th:text="*{marie}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">Mode de déplacement</td>
+						<td class="col2">
+							<span th:each="mode, status : ${listes.deplacements}">
+								<input type="radio" th:field="*{deplacement}" th:value="${mode}" />
+								<label th:for="${#ids.prev('deplacement')}" th:text="${listes.libellesDeplacements[status.index]}">Autre</label>
+							</span>
+						</td>
+						<td class="col3">
+							<span th:text="*{deplacement}"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<input type="submit" value="Valider" />
+			</p>
+		</form>
+	</body>
+</html>

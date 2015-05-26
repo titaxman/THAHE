@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{title}">Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div th:object="${someone}">		
+			<p>
+				<span th:text="#{personne.id}">Id :</span>
+				<span th:text="*{id}">14</span>
+			</p>
+			<p>
+				<span th:text="#{personne.nom}">Nom :</span>
+				<span th:text="*{nom}">Bill</span>
+			</p>
+			<p>
+				<span th:text="#{personne.age}">Age :</span>
+				<span th:text="*{age}">56</span>
+			</p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title>Ajax-04</title>
+		<link rel="stylesheet" href="/css/ajax01.css" />
+		<script type="text/javascript" src="/js/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/jquery.validate.unobtrusive.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/globalize.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/cultures/globalize.culture.fr-FR.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/cultures/globalize.culture.en-US.js"></script>
+		<script type="text/javascript" src="/js/json3.js"></script>
+		<script type="text/javascript" src="/js/client-validation.js"></script>
+		<script type="text/javascript" src="/js/local4.js"></script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+					var culture = [[${resultats.culture}]];
+					Globalize.culture(culture);
+					/*]]>*/
+		</script>
+	</head>
+	<body>
+		<h2>Ajax - 04</h2>
+		<p>
+			<strong th:text="#{labelHeureGetCulture(${resultats.heureGet},${resultats.culture})}">
+				Heure de chargement :
+			</strong>
+		</p>
+		<h4>
+			<p th:text="#{titre.part1}">
+				Opérations arithmétiques sur deux nombres réels A et B positifs ou nuls
+			</p>
+		</h4>
+		<form id="formulaire" name="formulaire" th:object="${actionModel01}">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<span th:text="#{valeur.a}"></span>
+						</th>
+						<th>
+							<span th:text="#{valeur.b}"></span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" id="a" name="a"
+								th:value="${resultats.culture}=='fr-FR' and ${actionModel01.a}!=null? ${#strings.replace(actionModel01.a,'.',',')} : ${actionModel01.a}"
+								data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-number=#{typeMismatch},data-val-min=#{actionModel01.a.min},data-val-min-value=#{actionModel01.a.min.value}" />
+						</td>
+						<td>
+							<input type="text" id="b" name="b"
+								th:value="${resultats.culture}=='fr-FR' and ${actionModel01.b}!=null? ${#strings.replace(actionModel01.b,'.',',')} : ${actionModel01.b}"
+								data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-number=#{typeMismatch},data-val-min=#{actionModel01.b.min},data-val-min-value=#{actionModel01.b.min.value}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-validation-valid" data-valmsg-for="a" data-valmsg-replace="true"></span>
+							<span th:if="${#fields.hasErrors('a')}" th:errors="*{a}" class="error">Donnée
+								erronée
+							</span>
+						</td>
+						<td>
+							<span class="field-validation-valid" data-valmsg-for="b" data-valmsg-replace="true"></span>
+							<span th:if="${#fields.hasErrors('b')}" th:errors="*{b}" class="error">Donnée
+								erronée
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<img id="loading" style="display: none" src="/images/loading.gif" />
+				<a href="javascript:postForm()" th:text="#{action.calculer}">Calculer</a>
+			</p>
+			<!-- champs cachés -->
+			<input type="hidden" id="culture" name="culture" th:value="${resultats.culture}"></input>
+		</form>
+		<hr />
+		<div id="entete">
+			<h4 id="titre">Résultats</h4>
+			<p>
+				<strong>
+					<span id="labelHeureCalcul">Heure de calcul :</span>
+					<span id="heureCalcul">12:10:87</span>
+				</strong>
+			</p>
+		</div>
+		<div id="résultats">
+			<p>
+				A+B=
+				<span id="aplusb">16,7</span>
+			</p>
+			<p>
+				A-B=
+				<span id="amoinsb">16,7</span>
+			</p>
+			<p>
+				A*B=
+				<span id="afoisb">16,7</span>
+			</p>
+			<p>
+				A/B=
+				<span id="adivb">16,7</span>
+			</p>
+		</div>
+		<div id="erreur">
+			<p style="color: red;">
+				<span id="msgErreur">xx</span>
+			</p>
+		</div>
+	</body>
+</html>

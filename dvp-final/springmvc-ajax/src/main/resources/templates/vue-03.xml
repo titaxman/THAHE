@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h4>Résultats</h4>
+		<p>
+			<strong>
+				<span th:text="#{labelHeureCalcul}">Heure de calcul :</span>
+				<span id="heureCalcul" th:text="${resultats.heurePost}"></span>
+			</strong>
+		</p>
+		<p style="color: red;">
+			<span th:text="#{LabelErreur(#{${resultats.erreur}})}">Une erreur s'est produite :</span>
+			<!-- <span id="erreur" th:text="${resultats.erreur}"></span> -->
+		</p>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/css/form19.css" />
+	</head>
+	<body>
+
+		<h3>Formulaire - Listes</h3>
+		<form action="/someURL" th:action="@{/v26.html}" method="post" th:object="${form}">
+			<table>
+				<thead>
+					<tr>
+						<th class="col1">Texte</th>
+						<th class="col2">Saisie</th>
+						<th class="col3">Valeur</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col1">Votre couleur préférée</td>
+						<td class="col2">
+							<select th:field="*{couleur2}">
+								<option value="0">rouge</option>
+								<option value="1">bleu</option>
+								<option value="2">vert</option>
+							</select>
+						</td>
+						<td class="col3">
+							<span th:text="*{couleur2}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">Pierres préférées (choix multiple)</td>
+						<td class="col2">
+							<select th:field="*{bijoux2}" multiple="multiple" size="3">
+								<option th:each="label, status : ${listes.libellesBijoux}" th:text="${label}" th:value="${status.index}">
+								</option>
+							</select>
+						</td>
+						<td class="col3">
+							<span th:text="*{strBijoux2}"></span>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<p>
+				<input type="submit" value="Valider" />
+			</p>
+		</form>
+	</body>
+</html>

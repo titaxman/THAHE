@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title>Ajax-09</title>
+		<link rel="stylesheet" href="/css/ajax01.css" />
+		<script type="text/javascript" src="/js/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/js/json3.js"></script>
+		<script type="text/javascript" src="/js/local9.js"></script>
+	</head>
+	<body>
+		<h3>Ajax - 09 - Navigation dans une Application à Page Unique</h3>
+		<h3>avec des flux HTML embarqués dans une chaîne jSON</h3>
+		<hr />
+		<div id="content" th:include="vue-09-page1" />
+		<img id="loading" src="/images/loading.gif" />
+		<div id="erreur" style="background-color:lightgrey"></div>
+	</body>
+</html>

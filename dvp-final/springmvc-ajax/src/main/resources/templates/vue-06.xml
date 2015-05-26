@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title>Ajax-06</title>
+		<link rel="stylesheet" href="/css/ajax01.css" />
+		<script type="text/javascript" src="/js/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/js/local6.js"></script>
+	</head>
+	<body>
+		<h3>Ajax - 06 - Navigation dans une Application à Page Unique</h3>
+		<div id="content" th:include="vue-07" />
+	</body>
+</html>

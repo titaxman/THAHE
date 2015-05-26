@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div id="saisies">
+		<h4>Saisies :</h4>
+		<p>
+			Chaîne de caractères :
+			<input type="text" id="text1" size="30" th:value="${value1}" />
+		</p>
+		<p>
+			Nombre entier :
+			<input type="text" id="text2" size="10" th:value="${value2}" />
+		</p>
+		<p>
+			<a href="javascript:valider()">Valider</a>
+		</p>
+	</div>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{title}">Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<form action="/someURL" th:action="@{/v16.html}" method="post">
+			<h2 th:text="#{personne.formulaire.titre}">Entrez les informations suivantes</h2>
+			<div th:object="${securedPerson}">
+				<table>
+					<thead></thead>
+					<tbody>
+						<tr>
+							<td th:text="#{personne.id}">Id :</td>
+							<td>
+								<input type="text" name="id" value="11" th:value="*{id}" />
+							</td>
+							<td>
+								<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color: red">Identifiant erroné</span>
+							</td>
+						</tr>
+						<tr>
+							<td th:text="#{personne.nom}">Nom :</td>
+							<td>
+								<input type="text" name="nom" value="Tintin" th:value="*{nom}" />
+							</td>
+							<td>
+								<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" style="color: red">Nom erroné</span>
+							</td>
+						</tr>
+						<tr>
+							<td th:text="#{personne.age}">Age :</td>
+							<td>
+								<input type="text" name="age" value="17" th:value="*{age}" />
+							</td>
+							<td>
+								<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red">Âge erroné</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="Valider" th:value="#{personne.formulaire.valider}" />
+				<ul>
+					<li th:each="err : ${#fields.errors('*')}" th:text="${err}" style="color: red" />
+				</ul>
+			</div>
+		</form>
+	</body>
+</html>

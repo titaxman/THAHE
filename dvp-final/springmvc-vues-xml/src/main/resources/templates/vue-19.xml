@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/css/form19.css" />
+	</head>
+	<body>
+		<h3>Formulaire - Validations côté serveur</h3>
+		<form action="/someURL" th:action="@{/v20.html}" method="post" th:object="${form19}">
+			<table>
+				<thead>
+					<tr>
+						<th class="col1">Contrainte</th>
+						<th class="col2">Saisie</th>
+						<th class="col3">Erreur</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col1">@NotEmpty</td>
+						<td class="col2">
+							<input type="text" th:field="*{strNotEmpty}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('strNotEmpty')}" th:errors="*{strNotEmpty}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@NotBlank</td>
+						<td class="col2">
+							<input type="text" th:field="*{strNotBlank}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('strNotBlank')}" th:errors="*{strNotBlank}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@assertFalse</td>
+						<td class="col2">
+							<input type="radio" th:field="*{assertFalse}" value="true" />
+							<label th:for="${#ids.prev('assertFalse')}">True</label>
+							<input type="radio" th:field="*{assertFalse}" value="false" />
+							<label th:for="${#ids.prev('assertFalse')}">False</label>
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('assertFalse')}" th:errors="*{assertFalse}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@assertTrue</td>
+						<td class="col2">
+							<select th:field="*{assertTrue}">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('assertTrue')}" th:errors="*{assertTrue}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Past</td>
+						<td class="col2">
+							<input type="date" th:field="*{dateInPast}" th:value="*{dateInPast}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('dateInPast')}" th:errors="*{dateInPast}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Future</td>
+						<td class="col2">
+							<input type="date" th:field="*{dateInFuture}" th:value="*{dateInFuture}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('dateInFuture')}" th:errors="*{dateInFuture}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Max</td>
+						<td class="col2">
+							<input type="text" th:field="*{intMax100}" th:value="*{intMax100}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('intMax100')}" th:errors="*{intMax100}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Min</td>
+						<td class="col2">
+							<input type="text" th:field="*{intMin10}" th:value="*{intMin10}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('intMin10')}" th:errors="*{intMin10}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Size</td>
+						<td class="col2">
+							<input type="text" th:field="*{strBetween4and6}" th:value="*{strBetween4and6}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('strBetween4and6')}" th:errors="*{strBetween4and6}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Pattern(hh:mm:ss)</td>
+						<td class="col2">
+							<input type="text" th:field="*{hhmmss}" th:value="*{hhmmss}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('hhmmss')}" th:errors="*{hhmmss}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Email</td>
+						<td class="col2">
+							<input type="text" th:field="*{email}" th:value="*{email}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Length</td>
+						<td class="col2">
+							<input type="text" th:field="*{str4}" th:value="*{str4}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('str4')}" th:errors="*{str4}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@Range</td>
+						<td class="col2">
+							<input type="text" th:field="*{int1014}" th:value="*{int1014}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('int1014')}" th:errors="*{int1014}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">@URL</td>
+						<td class="col2">
+							<input type="text" th:field="*{url}" th:value="*{url}" />
+						</td>
+						<td class="col3">
+							<span th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<input type="submit" value="Valider" />
+			</p>
+		</form>
+	</body>
+</html>

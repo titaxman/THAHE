@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{title}">Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<form action="/someURL" th:action="@{/v14.html}" method="post">
+			<h2 th:text="#{personne.formulaire.titre}">Entrez les informations suivantes</h2>
+			<div th:object="${personne}">
+				<table>
+					<thead></thead>
+					<tbody>
+						<tr>
+							<td th:text="#{personne.id}">Id :</td>
+							<td>
+								<input type="text" name="id" value="11" th:value="''" />
+							</td>
+						</tr>
+						<tr>
+							<td th:text="#{personne.nom}">Nom :</td>
+							<td>
+								<input type="text" name="nom" value="Tintin" th:value="''" />
+							</td>
+						</tr>
+						<tr>
+							<td th:text="#{personne.age}">Age :</td>
+							<td>
+								<input type="text" name="age" value="17" th:value="''" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<input type="submit" value="Valider" th:value="#{personne.formulaire.valider}" />
+		</form>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{messages.titre}">Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h2 th:text="#{messages.titre}">Spring 4 MVC</h2>
+		<p th:text="#{messages.msg1(${param1})}"></p>
+		<p th:text="#{messages.msg2(${param2},${param3})}"></p>
+		<p th:text="#{messages.msg3(#{${param4}})}"></p>
+	</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring 4 MVC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/css/form01.css" />
+		<script type="text/javascript" src="/js/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/jquery.validate.unobtrusive.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/globalize.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/cultures/globalize.culture.fr-FR.js"></script>
+		<script type="text/javascript" src="/js/jquery/globalize/cultures/globalize.culture.en-US.js"></script>
+		<script type="text/javascript" src="/js/json3.js"></script>
+		<script type="text/javascript" src="/js/client-validation.js"></script>
+		<script type="text/javascript" src="/js/local.js"></script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+					var culture = [[${locale}]];
+					Globalize.culture(culture);
+					/*]]>*/
+		</script>
+	</head>
+	<body>
+		<!-- titre -->
+		<h3>
+			<span th:text="#{form01.title}"></span>
+			<span th:text="${locale}"></span>
+		</h3>
+		<!-- menu -->
+		<p>
+			<a id="locale_fr" href="javascript:setLocale('fr_FR')">
+				<span th:text="#{locale.fr}"></span>
+			</a>
+			<a id="locale_en" href="javascript:setLocale('en_US')">
+				<span style="margin-left:30px" th:text="#{locale.en}"></span>
+			</a>
+			<a id="clientValidationTrue" href="javascript:setClientValidation(true)">
+				<span style="margin-left:30px" th:text="#{client.validation.true}"></span>
+			</a>
+			<a id="clientValidationFalse" href="javascript:setClientValidation(false)">
+				<span style="margin-left:30px" th:text="#{client.validation.false}"></span>
+			</a>
+		</p>
+		<!-- formulaire -->
+		<form action="/someURL" th:action="@{/js02.html}" method="post" th:object="${form01}" name="form" id="form">
+			<table>
+				<thead>
+					<tr>
+						<th class="col1" th:text="#{form01.col1}">Contrainte</th>
+						<th class="col2" th:text="#{form01.col2}">Saisie</th>
+						<th class="col3" th:text="#{form01.col3}">Validation client</th>
+						<th class="col4" th:text="#{form01.col4}">Validation serveur</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- required -->
+					<tr>
+						<td class="col1">required</td>
+						<td class="col2">
+							<input type="text" th:field="*{strNotEmpty}" data-val="true" th:attr="data-val-required=#{NotNull}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="strNotEmpty" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('strNotEmpty')}" th:errors="*{strNotEmpty}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, assertfalse -->
+					<tr>
+						<td class="col1">required, assertfalse</td>
+						<td class="col2">
+							<input type="radio" th:field="*{assertFalse}" value="true" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-assertfalse=#{AssertFalse}" />
+							<label th:for="${#ids.prev('assertFalse')}">true</label>
+							<input type="radio" th:field="*{assertFalse}" value="false" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-assertfalse=#{AssertFalse}" />
+							<label th:for="${#ids.prev('assertFalse')}">false</label>
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="assertFalse" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('assertFalse')}" th:errors="*{assertFalse}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, asserttrue -->
+					<tr>
+						<td class="col1">asserttrue</td>
+						<td class="col2">
+							<select th:field="*{assertTrue}" data-val="true" th:attr="data-val-asserttrue=#{AssertTrue}">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="assertTrue" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('assertTrue')}" th:errors="*{assertTrue}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, date, past -->
+					<tr>
+						<td class="col1">required, date, past</td>
+						<td class="col2">
+							<input type="date" th:field="*{dateInPast}" th:value="*{dateInPast}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-date=#{DateInvalide.form01},data-val-past=#{Past.form01.dateInPast}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="dateInPast" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('dateInPast')}" th:errors="*{dateInPast}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, date, future -->
+					<tr>
+						<td class="col1">required, date, future</td>
+						<td class="col2">
+							<input type="date" th:field="*{dateInFuture}" th:value="*{dateInFuture}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-date=#{DateInvalide.form01},data-val-future=#{Future.form01.dateInFuture}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="dateInFuture" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('dateInFuture')}" th:errors="*{dateInFuture}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, int, max(100) -->
+					<tr>
+						<td class="col1">required, int, max(100)</td>
+						<td class="col2">
+							<input type="text" th:field="*{intMax100}" th:value="*{intMax100}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-int=#{typeMismatch},data-val-max=#{Max.form01.intMax100},data-val-max-value=#{form01.intMax100.value}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="intMax100" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('intMax100')}" th:errors="*{intMax100}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, int, min(10) -->
+					<tr>
+						<td class="col1">required, int, min(10)</td>
+						<td class="col2">
+							<input type="text" th:field="*{intMin10}" th:value="*{intMin10}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-int=#{typeMismatch},data-val-min=#{Min.form01.intMin10},data-val-min-value=#{form01.intMin10.value}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="intMin10" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('intMin10')}" th:errors="*{intMin10}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, regex -->
+					<tr>
+						<td class="col1">required, regex</td>
+						<td class="col2">
+							<input type="text" th:field="*{strBetween4and6}" th:value="*{strBetween4and6}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-regex=#{Size.form01.strBetween4and6},data-val-regex-pattern=#{form01.strBetween4and6.pattern}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="strBetween4and6" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('strBetween4and6')}" th:errors="*{strBetween4and6}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, regex -->
+					<tr>
+						<td class="col1">required, regex</td>
+						<td class="col2">
+							<input type="text" th:field="*{hhmmss}" th:value="*{hhmmss}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-regex=#{Pattern.form01.hhmmss},data-val-regex-pattern=#{form01.hhmmss.pattern}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="hhmmss" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('hhmmss')}" th:errors="*{hhmmss}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, email -->
+					<tr>
+						<td class="col1">required, email</td>
+						<td class="col2">
+							<input type="text" th:field="*{email}" th:value="*{email}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-email=#{Email.form01.email}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, regex -->
+					<tr>
+						<td class="col1">required, regex</td>
+						<td class="col2">
+							<input type="text" th:field="*{str4}" th:value="*{str4}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-regex=#{Length.form01.str4},data-val-regex-pattern=#{form01.str4.pattern}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="str4" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('str4')}" th:errors="*{str4}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, int, range (10,14) -->
+					<tr>
+						<td class="col1">required, int, range (10,14)</td>
+						<td class="col2">
+							<input type="text" th:field="*{int1014}" th:value="*{int1014}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-int=#{typeMismatch}, data-val-range=#{Range.form01.int1014},data-val-range-max=#{form01.int1014.max},data-val-range-min=#{form01.int1014.min}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="int1014" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('int1014')}" th:errors="*{int1014}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- double1 : required, number, range (2.3,3.4) -->
+					<tr>
+						<td class="col1">double1 : required, number, range (2.3,3.4)</td>
+						<td class="col2">
+							<input type="text" th:field="*{double1}" th:value="*{double1}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-number=#{typeMismatch},data-val-range=#{Range.form01.double1},data-val-range-max=#{form01.double1.max},data-val-range-min=#{form01.double1.min}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="double1" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('double1')}" th:errors="*{double1}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- double2 : none -->
+					<tr>
+						<td class="col1">double2 : none</td>
+						<td class="col2">
+							<input type="text" th:field="*{double2}" th:value="*{double2}" />
+						</td>
+						<td class="col3"></td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('double2')}" th:errors="*{double2}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- double3 : required, number, custom3 -->
+					<tr>
+						<td class="col1">double3 : required, number, custom3</td>
+						<td class="col2">
+							<input type="text" th:field="*{double3}" th:value="*{double3}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-number=#{typeMismatch},data-val-custom3=${custom3.message},data-val-custom3-field=${custom3.otherFieldName},data-val-custom3-max=${custom3.max},data-val-custom3-min=${custom3.min}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="double3" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('double3')}" th:errors="*{double3}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+					<!-- required, url -->
+					<tr>
+						<td class="col1">required, url</td>
+						<td class="col2">
+							<input type="text" th:field="*{url}" th:value="*{url}" data-val="true"
+								th:attr="data-val-required=#{NotNull},data-val-url=#{URL.form01.url}" />
+						</td>
+						<td class="col3">
+							<span class="field-validation-valid" data-valmsg-for="url" data-valmsg-replace="true"></span>
+						</td>
+						<td class="col4">
+							<span th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="error">Donnée erronée</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<!-- bouton de validation -->
+				<input type="submit" th:value="#{form01.valider}" value="Valider" onclick="javascript:postForm01()" />
+				<!-- champs cachés -->
+				<input type="hidden" th:field="*{clientValidation}" th:value="*{clientValidation}" value="true" />
+				<input type="hidden" th:field="*{lang}" th:value="*{lang}" value="true" />
+				<!-- image animée d'attente -->
+				<img id="loading" style="display: none" src="/images/loading.gif" />
+			</p>
+		</form>
+		<!-- message des validateurs côté serveur -->
+		<br />
+		<fieldset class="fieldset">
+			<legend>
+				<span th:text="#{server.error.message}"></span>
+			</legend>
+			<span th:text="${message}" class="error"></span>
+		</fieldset>
+	</body>
+</html>

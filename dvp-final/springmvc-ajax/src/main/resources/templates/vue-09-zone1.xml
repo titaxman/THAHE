@@ -1,0 +1,5 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<span th:text="#{message.zone}"></span>
+	<span th:text="${cpt1}"></span>
+</html>

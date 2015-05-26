@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.col1 {
+	background: lightblue;
+}
+
+.col2 {
+	background: Cornsilk;
+}
+
+.col3 {
+	background: #e2d31d;
+}
+
+.error {
+	color: red;
+}

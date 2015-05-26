@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h4 th:text="#{resultats}">Résultats</h4>
+		<p>
+			<strong>
+				<span th:text="#{labelHeureCalcul}">Heure de calcul :</span>
+				<span id="heureCalcul" th:text="${resultats.heurePost}"></span>
+			</strong>
+		</p>
+		<p>
+			<span th:text="#{labelAplusB}">A+B=</span>
+			<span id="aplusb"
+				th:text="${resultats.culture}=='fr-FR' and ${resultats.aplusb}!=null? ${#strings.replace(resultats.aplusb,'.',',')} : ${resultats.aplusb}"></span>
+		</p>
+		<p>
+			<span th:text="#{labelAmoinsB}">A-B=</span>
+			<span id="amoinsb"
+				th:text="${resultats.culture}=='fr-FR' and ${resultats.amoinsb}!=null? ${#strings.replace(resultats.amoinsb,'.',',')} : ${resultats.amoinsb}"></span>
+		</p>
+		<p>
+			<span th:text="#{labelAfoisB}">A*B=</span>
+			<span id="amultiplieparb"
+				th:text="${resultats.culture}=='fr-FR' and ${resultats.amultiplieparb}!=null? ${#strings.replace(resultats.amultiplieparb,'.',',')} : ${resultats.amultiplieparb}"></span>
+		</p>
+		<p>
+			<span th:text="#{labelAdivB}">A/B=</span>
+			<span id="adiviseparb"
+				th:text="${resultats.culture}=='fr-FR' and ${resultats.adiviseparb}!=null? ${#strings.replace(resultats.adiviseparb,'.',',')} : ${resultats.adiviseparb}"></span>
+		</p>
+	</body>
+</html>
